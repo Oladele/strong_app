@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118181753) do
+ActiveRecord::Schema.define(:version => 20130119224311) do
+
+  create_table "exercise_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "exercise_categories", ["name"], :name => "index_exercise_categories_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"
