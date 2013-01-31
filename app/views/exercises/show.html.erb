@@ -1,0 +1,12 @@
+<%= @exercise.name %>, <%= @exercise.exercise_category.name %>
+
+<% provide(:title, @exercise.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        	<%= @exercise.name %>
+      </h1>
+    </section>
+  </aside>
+</div>

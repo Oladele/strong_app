@@ -1,0 +1,29 @@
+<% provide(:title, 'New Exercise Category') %>
+<h1>New Exercise Category</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+  	<%= render 'shared/error_messages_exercise_categories' %>
+  	<div><strong>Existing Categories</strong></div>
+  	<div>
+  		<ul class="exercise_categories">
+  			<% @exercise_categories.each do |exercise_category| %>
+				<li>
+					<%= link_to exercise_category.name, exercise_category %>
+					<% if current_user.admin? %>
+						<%= link_to "delete", exercise_category, method: :delete, data: { confirm: "You sure?" } %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div><strong>Create New?</strong></div>
+    <%= form_for(@exercise_category) do |f| %>
+
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+
+		<%= f.submit "Create New Exercise Category", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>

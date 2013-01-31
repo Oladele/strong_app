@@ -1,7 +1,11 @@
 StrongApp::Application.routes.draw do
+  #get "exercises/new"
+
   #get "users/new"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :exercises
+  resources :exercise_categories
 
   root to: 'static_pages#home'
 
@@ -12,6 +16,9 @@ StrongApp::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+  match '/play',    to: 'static_pages#play'
+
+  #match '/exercises', to: 'exercises#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

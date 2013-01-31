@@ -9,4 +9,8 @@ FactoryGirl.define do
     	admin true
     end
   end
+
+	factory :exercise_category do
+    	name	"example category"
+    end
 end

@@ -1,0 +1,24 @@
+<% provide(:title, 'New Exercise') %>
+<h2>New Exercise</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@exercise) do |f| %>
+		<%= render 'shared/error_messages_exercises' %>
+
+		<%= f.label :exercise_category_id %>
+		<%= f.collection_select :exercise_category_id, ExerciseCategory.all, :id, :name %>
+
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+
+		<%= f.label :movement %>
+		<%= f.text_field :movement %>
+
+		<%= f.label :rep_distance %>
+		<%= f.text_field :rep_distance %>	
+
+		<%= f.submit "Enter New Exercise", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>

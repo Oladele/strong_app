@@ -1,0 +1,54 @@
+<% provide(:title, 'All Exercises') %>
+<h1>All Exercises</h1>
+
+
+<div class="tabbable">
+	
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tabs1-pane1" data-toggle="tab">All</a></li>
+			
+			<li class="">
+				<a href="#tabs1-pane2" data-toggle="tab">New</a>
+			</li>
+			
+			<li class="">
+				<a href="#tabs1-pane3" data-toggle="tab">Tab 3</a>
+			</li>
+			
+			<li>
+				<a href="#tabs1-pane4" data-toggle="tab">Tab 4</a>
+			</li>
+	</ul><!-- /.nav-tabs -->
+
+
+	<div class="tab-content">
+
+		<div class="tab-pane active" id="tabs1-pane1">
+			<h2>All Exercises</h2>
+			<div class = "row">
+				<% @exercise_categories.each do |exercise_category| %>
+					<div class = "span2">
+						<h5>
+				  			<%= link_to exercise_category.name, exercise_category %>
+				  		</h5>
+						<ul class="exercises">
+						  	<% @exercises.where("exercise_category_id = ?", exercise_category.id).each do |exercise| %>
+						    	<li>
+						    		<%= link_to exercise.name, exercise %>
+						    		<% if current_user.admin? %>
+						    			<%= link_to "[x]", exercise, method: :delete, data: { confirm: "You sure?" } %>
+						    		<% end %>
+						    	</li>
+						  	<% end %>
+						</ul>
+					</div><!-- class = "span2"-->
+				<% end %>
+			</div><!-- class=row-->
+		</div><!-- /.tabs1-pane1 -->
+
+		<div class="tab-pane" id="tabs1-pane2">
+			<%= render 'exercises/new' %>
+		</div><!-- /.tabs1-pane1 -->
+
+	</div><!-- /.tab-content -->
+</div><!-- /.tabbable --> 	 	
