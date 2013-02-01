@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130120104024) do
+ActiveRecord::Schema.define(:version => 20130201173542) do
 
   create_table "exercise_categories", :force => true do |t|
     t.string   "name"
@@ -26,8 +26,18 @@ ActiveRecord::Schema.define(:version => 20130120104024) do
     t.integer  "exercise_category_id"
     t.string   "movement"
     t.float    "rep_distance"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.float    "dfactor_body_up",                 :default => 0.0
+    t.float    "dfactor_body_down",               :default => 0.0
+    t.float    "dfactor_body_lat",                :default => 0.0
+    t.float    "dfactor_body_static_tension_max", :default => 0.0
+    t.float    "dfactor_body_static_tension_min", :default => 0.0
+    t.float    "wfactor_body_up",                 :default => 0.0
+    t.float    "wfactor_body_down",               :default => 0.0
+    t.float    "wfactor_body_lat",                :default => 0.0
+    t.float    "wfactor_body_static_tension_max", :default => 0.0
+    t.float    "wfactor_body_static_tension_min", :default => 0.0
   end
 
   add_index "exercises", ["name"], :name => "index_exercises_on_name", :unique => true

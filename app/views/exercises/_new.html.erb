@@ -12,11 +12,61 @@
 		<%= f.label :name %>
 		<%= f.text_field :name %>
 
-		<%= f.label :movement %>
-		<%= f.text_field :movement %>
+		<div>
+			<strong> Distance Factors (Relative to Body Length)</strong>
+		</div>
 
-		<%= f.label :rep_distance %>
-		<%= f.text_field :rep_distance %>	
+		<div class = "row">
+
+			<div class = "span1">
+				<%= f.label "Up" %>
+				<%= f.text_field :dfactor_body_up %>
+			</div>
+			<div class = "span1">
+				<%= f.label "Down" %>
+				<%= f.text_field :dfactor_body_down %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "lat" %>
+				<%= f.text_field :dfactor_body_lat %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "Hold+!" %>
+				<%= f.text_field :dfactor_body_static_tension_max %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "Hold+-" %>
+				<%= f.text_field :dfactor_body_static_tension_max %>	
+			</div>
+		</div>
+
+		<div>
+			<strong> Weight Factors (Relative to Body Weight)</strong>
+		</div>
+
+		<div class = "row">
+
+			<div class = "span1">
+				<%= f.label "Up" %>
+				<%= f.text_field :wfactor_body_up %>
+			</div>
+			<div class = "span1">
+				<%= f.label "Down" %>
+				<%= f.text_field :wfactor_body_down %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "lat" %>
+				<%= f.text_field :wfactor_body_lat %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "Hold+!" %>
+				<%= f.text_field :wfactor_body_static_tension_max %>	
+			</div>
+			<div class = "span1">
+				<%= f.label "Hold+-" %>
+				<%= f.text_field :wfactor_body_static_tension_max %>	
+			</div>
+		</div>
 
 		<%= f.submit "Enter New Exercise", class: "btn btn-large btn-primary"%>
     <% end %>
