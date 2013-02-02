@@ -42,22 +42,22 @@ class Exercise < ActiveRecord::Base
 	@@gfactor_static_tension_max = 0.4
 	@@gfactor_static_tension_min = 0.1
 
-	def work(other_weight_kg)
-		work_other(other_weight_kg) + work_body()
+	def work(weight_addional_kg)
+		work_additional(weight_addional_kg) + work_body()
 	end	
 
-	def work_other(other_weight_kg)
-		work_up = other_weight_kg*@@accel_gravity*@@gfactor_up*
+	def work_additional(weight_addional_kg)
+		work_up = weight_addional_kg*@@accel_gravity*@@gfactor_up*
 					@@body_height_m*dfactor_body_up
-		work_down = other_weight_kg*@@accel_gravity*@@gfactor_down*
+		work_down = weight_addional_kg*@@accel_gravity*@@gfactor_down*
 					@@body_height_m*dfactor_body_down
-		work_lat = other_weight_kg*@@accel_gravity*@@gfactor_lat*
+		work_lat = weight_addional_kg*@@accel_gravity*@@gfactor_lat*
 					@@body_height_m*dfactor_body_lat		
 		
-		work_static_tension_max = other_weight_kg*@@accel_gravity*@@gfactor_static_tension_max*
+		work_static_tension_max = weight_addional_kg*@@accel_gravity*@@gfactor_static_tension_max*
 					@@body_height_m*dfactor_body_static_tension_max
 		
-		work_static_tension_min = other_weight_kg*@@accel_gravity*@@gfactor_static_tension_min*
+		work_static_tension_min = weight_addional_kg*@@accel_gravity*@@gfactor_static_tension_min*
 					@@body_height_m*dfactor_body_static_tension_min
 		
 		work_up+work_down+work_lat+work_static_tension_max+work_static_tension_min

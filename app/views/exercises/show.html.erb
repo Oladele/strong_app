@@ -2,11 +2,67 @@
 
 <% provide(:title, @exercise.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="span10">
     <section>
       <h1>
-        	<%= @exercise.name %>
+        	<%= @exercise.name + " id:"+ @exercise.id.to_s%>
       </h1>
+      <div>
+			<strong> Distance Factors (Relative to Body Length)</strong>
+		</div>
+
+		<div class = "row">
+
+			<div class = "span1">
+				Up
+				<%= @exercise.dfactor_body_up %>
+			</div>
+			<div class = "span1">
+				Down
+				<%= @exercise.dfactor_body_down %>	
+			</div>
+			<div class = "span1">
+				Lat
+				<%= @exercise.dfactor_body_lat %>	
+			</div>
+			<div class = "span1">
+				Hold+!
+				<%= @exercise.dfactor_body_static_tension_max %>	
+			</div>
+			<div class = "span1">
+				"Hold+-"
+				<%= @exercise.dfactor_body_static_tension_max %>	
+			</div>
+		</div>
+
+		<div>
+			<strong> Weight Factors (Relative to Body Weight)</strong>
+		</div>
+
+		<div class = "row">
+
+			<div class = "span1">
+				Up
+				<%= @exercise.wfactor_body_up %>
+			</div>
+			<div class = "span1">
+				Down
+				<%= @exercise.wfactor_body_down %>	
+			</div>
+			<div class = "span1">
+				lat
+				<%= @exercise.wfactor_body_lat %>	
+			</div>
+			<div class = "span1">
+				Hold+!
+				<%= @exercise.wfactor_body_static_tension_max %>	
+			</div>
+			<div class = "span1">
+				"Hold+-
+				<%= @exercise.wfactor_body_static_tension_max %>	
+			</div>
+		</div>
+
     </section>
   </aside>
 </div>

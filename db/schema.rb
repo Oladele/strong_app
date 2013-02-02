@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201173542) do
+ActiveRecord::Schema.define(:version => 20130202140039) do
 
   create_table "exercise_categories", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20130201173542) do
 
   add_index "exercises", ["name"], :name => "index_exercises_on_name", :unique => true
 
+  create_table "reps", :force => true do |t|
+    t.integer  "workout_id"
+    t.integer  "exercise_id"
+    t.float    "weight_additional_kg", :default => 0.0
+    t.string   "notes"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "reps", ["workout_id", "created_at"], :name => "index_reps_on_workout_id_and_created_at"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -54,5 +65,17 @@ ActiveRecord::Schema.define(:version => 20130201173542) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "workouts", :force => true do |t|
+    t.integer  "user_id"
+    t.time     "date"
+    t.integer  "duration"
+    t.float    "weigh_in"
+    t.string   "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "workouts", ["user_id", "created_at"], :name => "index_workouts_on_user_id_and_created_at"
 
 end

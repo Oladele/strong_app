@@ -1,0 +1,11 @@
+<li>
+	<span class="content">
+		<%= "Workout ID: " + workout.id.to_s %>
+	</span>
+	<span class="timestamp">
+		Posted <%= time_ago_in_words(workout.created_at) %> ago.
+	</span>
+	<div>
+		Reps done: <%= workout.reps.count %>
+	</div>
+</li>
