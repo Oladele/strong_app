@@ -8,4 +8,12 @@
 	<div>
 		Reps done: <%= workout.reps.count %>
 	</div>
+	<ol>
+		<% workout.reps.each do |rep| %>
+			<li>
+			<%= "Exercise: " + Exercise.find(rep.exercise_id).name + ", " +
+				"Weight: " + rep.weight_additional_kg.to_s %>
+			</li>
+		<%end%>
+	</ol>
 </li>

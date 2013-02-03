@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @workouts = @user.workouts.paginate(page: params[:page])
-    
+    #@reps = @user.reps
+    #@exercises = Exercise.all
   end
 
   def new
@@ -54,10 +55,12 @@ class UsersController < ApplicationController
   end
 
   private
-    def signed_in_user
-      store_location
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
+
+    #moved to app/helpers/sessions_helper.rb
+    #def signed_in_user
+    #  store_location
+    #  redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    #end
 
     def correct_user
       @user = User.find(params[:id])

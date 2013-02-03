@@ -1,4 +1,5 @@
 <li>
+	<% if @user.workouts.any? %>
 	<span class="content">
 		<%= "Rep ID: " + rep.id.to_s %>
 	</span>

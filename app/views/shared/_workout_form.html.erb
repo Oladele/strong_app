@@ -1,0 +1,14 @@
+<%= form_for(@workout) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div>
+		<%= f.label :weigh_in %>
+		<%= f.text_field :weigh_in, placeholder: "kg" %>
+		
+		<%= f.label :date %>
+		<%= f.date_select :date %>
+
+		<%= f.label :notes %>
+		<%= f.text_field :notes %>
+	</div>
+		<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

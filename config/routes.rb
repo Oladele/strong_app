@@ -6,6 +6,7 @@ StrongApp::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :exercises
   resources :exercise_categories
+  resources :workouts
 
   root to: 'static_pages#home'
 

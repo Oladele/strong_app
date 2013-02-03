@@ -34,7 +34,7 @@
 						<ul class="exercises">
 						  	<% @exercises.where("exercise_category_id = ?", exercise_category.id).each do |exercise| %>
 						    	<li>
-						    		<%= link_to exercise.name+", "+exercise.work(1).to_s, exercise %>
+						    		<%= link_to exercise.name+", "+exercise.work(0).to_s, exercise %>
 						    		<% if current_user.admin? %>
 						    			<%= link_to "[x]", exercise, method: :delete, data: { confirm: "You sure?" } %>
 						    		<% end %>

@@ -1,7 +1,7 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    admin = User.create!(name: "Admin",
+    admin = User.create!(name: "Dele",
                  email: "admin@admin.org",
                  password: "ronaldo",
                  password_confirmation: "ronaldo")
@@ -36,13 +36,15 @@ namespace :db do
     pullup.set_wfactor_body(0.98,0.98,0,0,0)
     pullup.save
 
-    users = User.all(limit: 6)
+    users = User.all(limit: 2)
+    n = 0
     5.times do
-      #content = Faker::Lorem.sentence(5)
       users.each do |user|
         wkout = user.workouts.create!()
-        #rep = wkout.reps.create!() *WIP
-        #rep.exercise_id= *WIP
+        rep = wkout.reps.create!(exercise_id: 1, weight_additional_kg: n)
+        rep = wkout.reps.create!(exercise_id: 1, weight_additional_kg: n)
+        rep = wkout.reps.create!(exercise_id: 1, weight_additional_kg: n)
+        n += 5
       end
     end
   end

@@ -9,12 +9,14 @@
 #  notes                :string(255)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  exercise_name        :string(255)
 #
 
 class Rep < ActiveRecord::Base
   attr_accessible :exercise_id, :notes, :weight_additional_kg, :workout_id
   
   belongs_to :workout
+  belongs_to :user
 
   validates :workout_id, presence: true
   
