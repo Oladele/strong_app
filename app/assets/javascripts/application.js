@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(
+	function ()
+	{
+        $('#workout_date').datepicker();
+	}
+);

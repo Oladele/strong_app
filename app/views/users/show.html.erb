@@ -18,10 +18,38 @@
 	<div class="span16">
 		<% if @user.workouts.any? %>
 			<h3>Workouts(<%= @user.workouts.count %>)</h3>
-			<ol class="workouts">
-				<%= render @workouts %>
-			</ol>
-			<%= will_paginate @workouts %>
 		<% end %>
 	</div>	
+</div>
+
+<%= will_paginate @workouts %>
+
+<div class="accordion" id="accordion2">
+	
+	<% @user.workouts.each do |workout| %>
+		<% accordion_linkage = workout.id.to_s %>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= accordion_linkage %>">
+					<span class="timestamp">
+						Workout posted <%= time_ago_in_words(workout.created_at) %> ago, Total Reps: <%= workout.reps.count %>
+					</span>
+				</a>
+			</div>
+			<div id="<%= accordion_linkage %>" class="accordion-body collapse">
+				<div class="accordion-inner">
+					<ol>
+						<% workout.reps.each do |rep| %>
+							<li>
+							<%= "Exercise: " + Exercise.find(rep.exercise_id).name + ", " +
+								"Weight: " + rep.weight_additional_kg.to_s %>
+							</li>
+						<%end%>
+					</ol>
+				</div>
+			</div>
+		</div>	
+	<% end%>
+
+
 </div>
