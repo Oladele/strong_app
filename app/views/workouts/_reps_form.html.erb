@@ -1,0 +1,14 @@
+<div class="reps_input">
+	<div class="row">
+		<div class="span4">
+			<%= rep_fields.collection_select :exercise_id, Exercise.all, :id, :name %>
+		</div>
+		<div class="span1">
+			<%= rep_fields.text_field :weight_additional_kg %>
+		</div>
+		<div class="span1 pull-right">
+			<%= rep_fields.check_box :_destroy %>
+			<%= rep_fields.label :_destroy,"x" %>
+		</div>
+	</div>
+</div>

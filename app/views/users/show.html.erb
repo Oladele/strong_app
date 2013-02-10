@@ -15,11 +15,16 @@
 	</div>	
 </div>
 <div class="row">
-	<div class="span16">
+	<div class="span6">
 		<% if @user.workouts.any? %>
-			<h3>Workouts(<%= @user.workouts.count %>)</h3>
+			<h3>Total Workouts(<%= @user.workouts.count %>)</h3>
+		<%else%>
+			<h3>No workouts recorded.</h3>
 		<% end %>
-	</div>	
+	</div>
+	<div class="span4">
+			<h3><%= link_to "Start new workout?", new_workout_path %></h3>
+	</div>		
 </div>
 
 <%= will_paginate @workouts %>
@@ -30,11 +35,23 @@
 		<% accordion_linkage = workout.id.to_s %>
 		<div class="accordion-group">
 			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= accordion_linkage %>">
-					<span class="timestamp">
-						Workout posted <%= time_ago_in_words(workout.created_at) %> ago, Total Reps: <%= workout.reps.count %>
-					</span>
-				</a>
+				<div class="row">
+					<div class="span6">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= accordion_linkage %>">
+								Workout posted <%= time_ago_in_words(workout.created_at) %> ago, Total Reps: <%= workout.reps.count %>					
+						</a>
+					</div>
+					<div class="span2">
+						<% if current_user?(workout.user) %>
+							<%= link_to "edit", edit_workout_path(workout) %>
+						<%end%>
+					</div>
+					<div class="span2">
+						<% if current_user?(workout.user) %>
+	   						<%= link_to "delete", workout, method: :delete, data: { confirm: "You sure?" }, title: workout.created_at %>
+						<%end%>
+					</div>
+				</div>
 			</div>
 			<div id="<%= accordion_linkage %>" class="accordion-body collapse">
 				<div class="accordion-inner">

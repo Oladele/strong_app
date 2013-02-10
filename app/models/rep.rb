@@ -15,10 +15,11 @@
 class Rep < ActiveRecord::Base
   attr_accessible :exercise_id, :notes, :weight_additional_kg, :workout_id
   
-  belongs_to :workout
+  belongs_to :workout, :inverse_of => :reps
   belongs_to :user
 
-  validates :workout_id, presence: true
+  #validates :workout_id, presence: true
+  #issue with nested forms failing with validates
   
   default_scope order: 'reps.created_at ASC'
 end

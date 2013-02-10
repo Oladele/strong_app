@@ -47,4 +47,9 @@ module SessionsHelper
 	def store_location
 		session[:return_to] = request.url
 	end
+
+	def correct_user
+      @workout = current_user.workouts.find_by_id(params[:id])
+      redirect_to root_url if @workout.nil?
+    end
 end
