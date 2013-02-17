@@ -35,6 +35,20 @@ textarea {
   }
 }
 
+.center-icon {
+  /*display: block;*/
+  /*height: 16px;*/
+  /*line-height: 16px;*/
+  padding-left: 10px;
+  padding-right: 10px;
+
+  /*margin-right: 10px;*/
+  /*margin-bottom: 10px;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -239,4 +253,21 @@ input {
   height: 5px;
   background: blue;
   display: inline-block;
+}
+
+.rep-list {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 1px 0;
+    border-top: 1px solid $grayLighter;
+    &:first-child {
+      border-top: 0
+    }
+    &:last-child {
+      border-bottom: 0
+    }
+
+  }
 }

@@ -15,15 +15,19 @@
 	</div>	
 </div>
 <div class="row">
-	<div class="span6">
+	<div class="span9">
 		<% if @user.workouts.any? %>
 			<h3>Total Workouts(<%= @user.workouts.count %>)</h3>
 		<%else%>
 			<h3>No workouts recorded.</h3>
 		<% end %>
 	</div>
-	<div class="span4">
-			<h3><%= link_to "Start new workout?", new_workout_path %></h3>
+</div>
+<div class="row">
+	<div class="span2">
+			<% if current_user?(@user) %>
+				<h3><%= link_to "New workout", new_workout_path, class: "btn btn-large btn-primary" %></h3>
+			<% end %>
 	</div>		
 </div>
 
@@ -36,45 +40,61 @@
 		<div class="accordion-group">
 			<div class="accordion-heading">
 				<div class="row">
-					<div class="span6">
+					<div class="span9">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= accordion_linkage %>">
 								<% dtdate = workout.date %>
 								<% strdate = dtdate.inspect %>
 								<% ardate = strdate.split %>
-								<%= "#{ardate[2]} #{ardate[1]} #{ardate[0]}" %> 
-								<%= pluralize(workout.reps.count, "rep") %> , 
-								<%= number_with_delimiter(workout.work_joule, delimiter: ',') %> joules
-								
-								<% n = number_with_delimiter(workout.weight_lifted_lb, delimiter: ',') %>
-								<%= n %> pounds
+								<span class="span2">
+								<%= "#{ardate[0]} #{ardate[2]} #{ardate[1]}" %>: 
+								</span>
+								<span class="span3">
+									<% n = number_with_delimiter(workout.weight_lifted_lb, delimiter: ',') %>
+									<strong><%= n %> lbs </strong>
+									(<%= number_with_delimiter(workout.work_joule, delimiter: ',') %> joules)
+								</span>
 								<% bars = (workout.weight_lifted_lb/1000).round %>
 								
 								<% 1.upto(bars) do |n| %>
-									<span>.</span>
+									<span class="btn btn-mini btn-primary" ></span>
+
 								<% end %>
 							
 						</a>
 					</div>
-					<div class="span2">
-						<% if current_user?(workout.user) %>
-							<%= link_to "edit", edit_workout_path(workout) %>
-						<%end%>
-					</div>
-					<div class="span2">
-						<% if current_user?(workout.user) %>
-	   						<%= link_to "delete", workout, method: :delete, data: { confirm: "You sure?" }, title: workout.created_at %>
-						<%end%>
-					</div>
+
+					<% if current_user?(workout.user) %>
+						<div class="span1">
+							<%= link_to edit_workout_path(workout) do %>
+								<span class="btn btn-mini btn-primary  center-icon">
+									<i class="icon-pencil icon-white"></i>
+								</span>
+							<%end%>
+						</div>
+						<div class="span1">
+		   					
+		   					<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+									<i class="icon-remove icon-white"></i>
+								</span>'.html_safe, workout, method: :delete, data: { confirm: "You sure?" }, title: workout.created_at %>
+
+						</div>
+					<%end%>
 				</div>
 			</div>
 			<div id="<%= accordion_linkage %>" class="accordion-body collapse">
-				<div class="accordion-inner">
+				<div class="accordion-inner rep-list">
 					<ol>
 						<% workout.reps.each do |rep| %>
 							<li>
-								<%=Exercise.find(rep.exercise_id).name %>:
-								<%= rep.weight_additional_lb %> lbs, 
-								(<%= rep.work_joule.round %> joules)
+							
+								<span class="span2">
+									<%=Exercise.find(rep.exercise_id).name %>:
+								</span>
+								<span>
+									<%= rep.weight_additional_lb %> lbs, 
+									(<%= rep.work_joule.round %> joules)
+								</span>
+							
 							</li>
 						<%end%>
 					</ol>
