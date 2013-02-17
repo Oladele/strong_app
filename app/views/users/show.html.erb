@@ -55,11 +55,21 @@
 								</span>
 								<% bars = (workout.weight_lifted_lb/1000).round %>
 								
-								<% 1.upto(bars) do |n| %>
-									<span class="btn btn-mini btn-primary" ></span>
-
+								<% 1.upto(3 < bars ? 3 : bars) do |n| %>
+									<span class="btn btn-mini intensity-bars" ></span>
 								<% end %>
-							
+								<% 4.upto(6 < bars ? 6 : bars) do |n| %>
+									<span class="btn btn-mini btn-info intensity-bars" ></span>
+								<% end %>
+								<% 7.upto(9 < bars ? 9 : bars) do |n| %>
+									<span class="btn btn-mini btn-primary intensity-bars" ></span>
+								<% end %>
+								<% 10.upto(12 < bars ? 3 : bars) do |n| %>
+									<span class="btn btn-mini btn-danger intensity-bars" ></span>
+								<% end %>
+								<% 13.upto(bars) do |n| %>
+									<span class="btn btn-mini btn-inverse intensity-bars" ></span>
+								<% end %>
 						</a>
 					</div>
 
