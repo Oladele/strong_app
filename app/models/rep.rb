@@ -22,4 +22,17 @@ class Rep < ActiveRecord::Base
   #issue with nested forms failing with validates
   
   default_scope order: 'reps.created_at ASC'
+
+  
+  def work_joule
+  	Exercise.find(exercise_id).work_joule(weight_additional_kg)
+  end
+
+  def weight_additional_lb()
+    w_kg = weight_additional_kg
+    uw_kg = Unit.new("#{w_kg} kg")
+    uw_lb = uw_kg >> "lb"
+    w_lb = uw_lb.scalar.to_f.round
+  end
+
 end

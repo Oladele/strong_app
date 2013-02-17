@@ -231,3 +231,12 @@ input {
   padding: 10px 0;
   border-top: 1px solid $grayLighter;
 }
+
+/* instensity bars and stuff */
+
+#square {
+  width: 5px;
+  height: 5px;
+  background: blue;
+  display: inline-block;
+}

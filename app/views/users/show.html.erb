@@ -31,14 +31,28 @@
 
 <div class="accordion" id="accordion2">
 	
-	<% @user.workouts.each do |workout| %>
+	<% @workouts.each do |workout| %>
 		<% accordion_linkage = workout.id.to_s %>
 		<div class="accordion-group">
 			<div class="accordion-heading">
 				<div class="row">
 					<div class="span6">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= accordion_linkage %>">
-								Workout posted <%= time_ago_in_words(workout.created_at) %> ago, Total Reps: <%= workout.reps.count %>					
+								<% dtdate = workout.date %>
+								<% strdate = dtdate.inspect %>
+								<% ardate = strdate.split %>
+								<%= "#{ardate[2]} #{ardate[1]} #{ardate[0]}" %> 
+								<%= pluralize(workout.reps.count, "rep") %> , 
+								<%= number_with_delimiter(workout.work_joule, delimiter: ',') %> joules
+								
+								<% n = number_with_delimiter(workout.weight_lifted_lb, delimiter: ',') %>
+								<%= n %> pounds
+								<% bars = (workout.weight_lifted_lb/1000).round %>
+								
+								<% 1.upto(bars) do |n| %>
+									<span>.</span>
+								<% end %>
+							
 						</a>
 					</div>
 					<div class="span2">
@@ -58,8 +72,9 @@
 					<ol>
 						<% workout.reps.each do |rep| %>
 							<li>
-							<%= "Exercise: " + Exercise.find(rep.exercise_id).name + ", " +
-								"Weight: " + rep.weight_additional_kg.to_s %>
+								<%=Exercise.find(rep.exercise_id).name %>:
+								<%= rep.weight_additional_lb %> lbs, 
+								(<%= rep.work_joule.round %> joules)
 							</li>
 						<%end%>
 					</ol>

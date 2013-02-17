@@ -42,11 +42,11 @@ class Exercise < ActiveRecord::Base
 	@@gfactor_static_tension_max = 0.4
 	@@gfactor_static_tension_min = 0.1
 
-	def work(weight_addional_kg)
-		work_additional(weight_addional_kg) + work_body()
+	def work_joule(weight_addional_kg)
+		work_additional_joule(weight_addional_kg) + work_body_joule()
 	end	
 
-	def work_additional(weight_addional_kg)
+	def work_additional_joule(weight_addional_kg)
 		work_up = weight_addional_kg*@@accel_gravity*@@gfactor_up*
 					@@body_height_m*dfactor_body_up
 		work_down = weight_addional_kg*@@accel_gravity*@@gfactor_down*
@@ -63,7 +63,7 @@ class Exercise < ActiveRecord::Base
 		work_up+work_down+work_lat+work_static_tension_max+work_static_tension_min
 	end
 
-	def work_body()
+	def work_body_joule()
 		work_up = @@body_weight_kg*@@accel_gravity*@@gfactor_up*
 					wfactor_body_up*@@body_height_m*dfactor_body_up
 		work_down = @@body_weight_kg*@@accel_gravity*@@gfactor_down*

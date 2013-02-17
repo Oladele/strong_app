@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203184644) do
+ActiveRecord::Schema.define(:version => 20130216194425) do
 
   create_table "exercise_categories", :force => true do |t|
     t.string   "name"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(:version => 20130203184644) do
 
   create_table "workouts", :force => true do |t|
     t.integer  "user_id"
-    t.time     "date"
     t.integer  "duration"
     t.float    "weigh_in"
     t.string   "notes"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "date"
   end
 
   add_index "workouts", ["user_id", "created_at"], :name => "index_workouts_on_user_id_and_created_at"
