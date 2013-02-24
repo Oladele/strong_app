@@ -46,7 +46,7 @@ namespace :db do
     users = User.all(limit: 1)
     n = 0
     users.each do |user|
-      wks = 2
+      wks = 20
       uweight1_lb = Unit.new("215 lb")
       uweight2_lb = Unit.new("125 lb")
 
