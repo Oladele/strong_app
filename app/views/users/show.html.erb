@@ -98,8 +98,10 @@
 							<li>
 							
 								<span class="span2">
-									<%=Exercise.find(rep.exercise_id).name 
+									<%=
+									#Exercise.find(rep.exercise_id).name 
 									#rep.exercise_id
+									rep.exercise_name
 									%>:
 								</span>
 								<span class="span3">
