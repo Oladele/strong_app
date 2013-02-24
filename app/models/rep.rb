@@ -25,7 +25,7 @@ class Rep < ActiveRecord::Base
   default_scope order: 'reps.created_at ASC'
   
   #before_create :work_joule_private
-  before_save :work_joule_private
+  before_save :update_private
   #after_save :work_joule_private
   #after_create :work_joule_private
   #after_commit :work_joule_private
@@ -47,10 +47,11 @@ class Rep < ActiveRecord::Base
     w_lb = uw_lb.scalar.to_f.round
   end
 
-  def work_joule_private
+  def update_private
     #Exercise.find(exercise_id).work_joule(weight_additional_kg)
     #self.work_joule = 5.0
     self.work_joule = Exercise.find(exercise_id).work_joule(weight_additional_kg)
+    self.exercise_name = Exercise.find(exercise_id).name
   end
 
   def update
@@ -60,6 +61,7 @@ class Rep < ActiveRecord::Base
     #Exercise.find(exercise_id).work_joule(weight_additional_kg)
     #@work_joule_private = 5.0
     self.work_joule = Exercise.find(exercise_id).work_joule(weight_additional_kg)
+    self.exercise_name = Exercise.find(rep.exercise_id).name
   end
 
 end
