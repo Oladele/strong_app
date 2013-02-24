@@ -10,6 +10,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  exercise_name        :string(255)
+#  work_joule           :float
 #
 
 require 'spec_helper'

@@ -4,12 +4,12 @@
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  date       :time
 #  duration   :integer
 #  weigh_in   :float
 #  notes      :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  date       :datetime
 #
 
 class Workout < ActiveRecord::Base

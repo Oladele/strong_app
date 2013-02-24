@@ -46,7 +46,7 @@ namespace :db do
     users = User.all(limit: 1)
     n = 0
     users.each do |user|
-      x = 3
+      wks = 20
       uweight1_lb = Unit.new("215 lb")
       uweight2_lb = Unit.new("125 lb")
 
@@ -65,8 +65,8 @@ namespace :db do
       weight1_incr_kg = uweight1_incr_kg.scalar.to_f
       weight2_incr_kg = uweight2_incr_kg.scalar.to_f
 
-      until x == 0
-        wkout = user.workouts.create!(date: x.weeks.ago)
+      until wks == 0
+        wkout = user.workouts.create!(date: wks.weeks.ago)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
@@ -146,7 +146,7 @@ namespace :db do
 
 
 
-        wkout = user.workouts.create!(date: x.weeks.ago + 3.days)
+        wkout = user.workouts.create!(date: wks.weeks.ago + 3.days)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
         rep = wkout.reps.create!(exercise_id: 2, weight_additional_kg: weight1_kg)
@@ -226,7 +226,7 @@ namespace :db do
         
         weight1_kg += weight1_incr_kg
         weight2_kg += weight2_incr_kg
-        x -= 1
+        wks -= 1
       end
     end
   end
