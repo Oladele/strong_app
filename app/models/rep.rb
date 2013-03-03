@@ -61,7 +61,7 @@ class Rep < ActiveRecord::Base
     #Exercise.find(exercise_id).work_joule(weight_additional_kg)
     #@work_joule_private = 5.0
     self.work_joule = Exercise.find(exercise_id).work_joule(weight_additional_kg)
-    self.exercise_name = Exercise.find(rep.exercise_id).name
+    self.exercise_name = Exercise.find(exercise_id).name
   end
 
 end

@@ -1,0 +1,16 @@
+<div class="rep_class reps_input">
+	<div class="row">
+		<div class="span4">
+			<%= rep_fields.collection_select :exercise_id, Exercise.all, :id, :name %>
+		</div>
+		<div class="span1">
+			<%= rep_fields.text_field :weight_additional_kg %>
+		</div>
+		<p class="span1 pull-right">
+			<%= rep_fields.hidden_field :_destroy %>
+			<%= link_to_remove_fields("remove", rep_fields)%>
+		</p>
+				
+
+	</div>
+</div>

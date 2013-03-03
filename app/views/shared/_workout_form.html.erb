@@ -25,8 +25,10 @@
 			</div>
 		</div>
 		<%= f.fields_for :reps do |builder| %>
-			<%= render 'reps_form', rep_fields: builder %>
+			<%= render 'rep_fields', f: builder %>
 		<% end %>
 	</div>
+	
+	<p><%= link_to_add_fields "Add Rep", f, :reps %></p>	
 	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
