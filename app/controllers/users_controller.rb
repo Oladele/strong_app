@@ -29,13 +29,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    #@user = User.find(params[:id])
+    @user = User.find(params[:id])
     #Per 9.2.2 Now that the correct_user before filter defines @user, 
     #we can omit it from both actions (edit and update).
   end
 
   def update
-    #@user = User.find(params[:id])
+    @user = User.find(params[:id])
     #Per 9.2.2 Now that the correct_user before filter defines @user, 
     #we can omit it from both actions (edit and update).
     if @user.update_attributes(params[:user])

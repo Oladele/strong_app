@@ -1,0 +1,28 @@
+<% dtdate = workout.date %>
+<% strdate = dtdate.inspect %>
+<% ardate = strdate.split %>
+<span class="span2">
+	<%= "#{ardate[0]} #{ardate[2]} #{ardate[1]}" %>: 
+</span>
+<span class="span3">
+	<% n = number_with_delimiter(workout.weight_lifted_lb, delimiter: ',') %>
+	<strong><%= n %> lbs </strong>
+	(<%= number_with_delimiter(workout.work_joule, delimiter: ',') %> joules)
+</span>
+<% bars = (workout.weight_lifted_lb/1000).round %>
+
+<% 1.upto(3 < bars ? 3 : bars) do |n| %>
+	<span class="btn btn-mini intensity-bars" ></span>
+<% end %>
+<% 4.upto(6 < bars ? 6 : bars) do |n| %>
+	<span class="btn btn-mini btn-info intensity-bars" ></span>
+<% end %>
+<% 7.upto(9 < bars ? 9 : bars) do |n| %>
+	<span class="btn btn-mini btn-primary intensity-bars" ></span>
+<% end %>
+<% 10.upto(12 < bars ? 12 : bars) do |n| %>
+	<span class="btn btn-mini btn-danger intensity-bars" ></span>
+<% end %>
+<% 13.upto(bars) do |n| %>
+	<span class="btn btn-mini btn-inverse intensity-bars" ></span>
+<% end %>

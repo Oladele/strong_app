@@ -1,0 +1,16 @@
+<% if current_user?(workout.user) %>
+	<div class="span1">
+		<%= link_to edit_workout_path(workout) do %>
+			<span class="btn btn-mini btn-primary  center-icon">
+				<i class="icon-pencil icon-white"></i>
+			</span>
+		<%end%>
+	</div>
+	<div class="span1">
+				
+				<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+				<i class="icon-remove icon-white"></i>
+			</span>'.html_safe, workout, method: :delete, data: { confirm: "You sure?" }, title: workout.created_at %>
+
+	</div>
+<%end%>

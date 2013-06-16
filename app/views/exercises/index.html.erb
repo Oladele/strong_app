@@ -1,54 +1,130 @@
 <% provide(:title, 'All Exercises') %>
 <h1>All Exercises</h1>
 
-
-<div class="tabbable">
-	
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tabs1-pane1" data-toggle="tab">All</a></li>
-			
-			<li class="">
-				<a href="#tabs1-pane2" data-toggle="tab">New</a>
-			</li>
-			
-			<li class="">
-				<a href="#tabs1-pane3" data-toggle="tab">Tab 3</a>
-			</li>
-			
-			<li>
-				<a href="#tabs1-pane4" data-toggle="tab">Tab 4</a>
-			</li>
-	</ul><!-- /.nav-tabs -->
-
-
-	<div class="tab-content">
-
-		<div class="tab-pane active" id="tabs1-pane1">
-			<h2>All Exercises</h2>
-			<div class = "row">
-				<% @exercise_categories.each do |exercise_category| %>
-					<div class = "span2">
-						<h5>
-				  			<%= link_to exercise_category.name, exercise_category %>
-				  		</h5>
-						<ul class="exercises">
-						  	<% @exercises.where("exercise_category_id = ?", exercise_category.id).each do |exercise| %>
-						    	<li>
-						    		<%= link_to exercise.name+", "+exercise.work_joule(0).round.to_s, exercise %>
-						    		<% if current_user.admin? %>
-						    			<%= link_to "[x]", exercise, method: :delete, data: { confirm: "You sure?" } %>
-						    		<% end %>
-						    	</li>
-						  	<% end %>
-						</ul>
-					</div><!-- class = "span2"-->
-				<% end %>
-			</div><!-- class=row-->
-		</div><!-- /.tabs1-pane1 -->
-
-		<div class="tab-pane" id="tabs1-pane2">
-			<%= render 'exercises/new' %>
-		</div><!-- /.tabs1-pane1 -->
-
-	</div><!-- /.tab-content -->
-</div><!-- /.tabbable --> 	 	
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a data-toggle="tab" href="#body">Body</a></li>
+    <li class=""><a data-toggle="tab" href="#barbell">Barbell</a></li>
+    <li class=""><a data-toggle="tab" href="#dumbell">Dumbell</a></li>
+    <li class=""><a data-toggle="tab" href="#kettlebell">Kettlebell</a></li>
+    <li class="dropdown">
+      <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a data-toggle="tab" href="#dropdown1">@fat</a></li>
+        <li><a data-toggle="tab" href="#dropdown2">@mdo</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div id="body" class="tab-pane fade active in">
+      	<ul class="exercises">
+  			<% exercise_category = @exercise_categories.select{|cat| cat.name == "BODYWEIGHT" } %>
+  			<% exercise_category_id = exercise_category.first.id %>
+  			<% #exercise_category_id = @exercise_categories[0].id %>
+		  	<% @exercises.where("exercise_category_id = ?", exercise_category_id).each do |exercise| %>
+		  		<div class = "row">
+			    	<li>
+			    		<div class="span2">
+			    			<%= link_to exercise.name, exercise %>
+			    		</div>
+			    		<div class="span1">
+			    			<%= link_to exercise.work_joule(0).round.to_s, exercise %>
+			    		</div>
+			    		<% if current_user.admin? %>
+			    		<div class="span1">
+			    			<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+									<i class="icon-remove icon-white"></i>
+								</span>'.html_safe, exercise, method: :delete, data: { confirm: "You sure?" }%>
+						</div>
+			    		<% end %>
+			    	</li>
+		    	</div>
+		  	<% end %>
+		</ul>
+    </div>
+    <div id="barbell" class="tab-pane fade">
+    	<ul class="exercises">
+  			<% exercise_category = @exercise_categories.select{|cat| cat.name == "BARBELL" } %>
+  			<% exercise_category_id = exercise_category.first.id %>
+  			<% #exercise_category_id = @exercise_categories[0].id %>
+		  	<% @exercises.where("exercise_category_id = ?", exercise_category_id).each do |exercise| %>
+		  		<div class = "row">
+			    	<li>
+			    		<div class="span2">
+			    			<%= link_to exercise.name, exercise %>
+			    		</div>
+			    		<div class="span1">
+			    			<%= link_to exercise.work_joule(0).round.to_s, exercise %>
+			    		</div>
+			    		<% if current_user.admin? %>
+			    		<div class="span1">
+			    			<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+									<i class="icon-remove icon-white"></i>
+								</span>'.html_safe, exercise, method: :delete, data: { confirm: "You sure?" }%>
+						</div>
+			    		<% end %>
+			    	</li>
+		    	</div>
+		  	<% end %>
+		</ul>
+    </div>
+    <div id="dumbell" class="tab-pane fade">
+      	<ul class="exercises">
+  			<% exercise_category = @exercise_categories.select{|cat| cat.name == "DUMBELL" } %>
+  			<% exercise_category_id = exercise_category.first.id %>
+  			<% #exercise_category_id = @exercise_categories[0].id %>
+		  	<% @exercises.where("exercise_category_id = ?", exercise_category_id).each do |exercise| %>
+		  		<div class = "row">
+			    	<li>
+			    		<div class="span2">
+			    			<%= link_to exercise.name, exercise %>
+			    		</div>
+			    		<div class="span1">
+			    			<%= link_to exercise.work_joule(0).round.to_s, exercise %>
+			    		</div>
+			    		<% if current_user.admin? %>
+			    		<div class="span1">
+			    			<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+									<i class="icon-remove icon-white"></i>
+								</span>'.html_safe, exercise, method: :delete, data: { confirm: "You sure?" }%>
+						</div>
+			    		<% end %>
+			    	</li>
+		    	</div>
+		  	<% end %>
+		</ul>
+    </div>
+    <div id="kettlebell" class="tab-pane fade">
+      	<ul class="exercises">
+  			<% exercise_category = @exercise_categories.select{|cat| cat.name == "KETTLEBELL" } %>
+  			<% exercise_category_id = exercise_category.first.id %>
+  			<% #exercise_category_id = @exercise_categories[0].id %>
+		  	<% @exercises.where("exercise_category_id = ?", exercise_category_id).each do |exercise| %>
+		  		<div class = "row">
+			    	<li>
+			    		<div class="span2">
+			    			<%= link_to exercise.name, exercise %>
+			    		</div>
+			    		<div class="span1">
+			    			<%= link_to exercise.work_joule(0).round.to_s, exercise %>
+			    		</div>
+			    		<% if current_user.admin? %>
+			    		<div class="span1">
+			    			<%= link_to '<span class="btn btn-mini btn-primary center-icon">
+									<i class="icon-remove icon-white"></i>
+								</span>'.html_safe, exercise, method: :delete, data: { confirm: "You sure?" }%>
+						</div>
+			    		<% end %>
+			    	</li>
+		    	</div>
+		  	<% end %>
+		</ul>
+    </div>
+    <div id="dropdown1" class="tab-pane fade">
+      <p>Etsy mixtape wayfarers....</p>
+    </div>
+    <div id="dropdown2" class="tab-pane fade">
+      <p>Trust fund seitan letterpress...</p>
+    </div>
+  </div>
+</div>

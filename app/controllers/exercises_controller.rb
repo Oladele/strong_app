@@ -27,6 +27,16 @@ class ExercisesController < ApplicationController
 	    end
   	end
 
+  	def update
+    @exercise = Exercise.find(params[:id])
+    if @exercise.update_attributes(params[:exercise])
+      flash[:success] = "Exercise updated"
+      redirect_to exercises_path
+    else
+      render 'edit'
+    end
+  end
+
   	def destroy
 		Exercise.find(params[:id]).destroy
 		flash[:success] = "Exercise removed"

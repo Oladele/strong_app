@@ -1,0 +1,36 @@
+<ol>
+	<% workout.reps.each do |rep| %>
+		<li>
+		
+			<span class="span2">
+				<%=
+				#Exercise.find(rep.exercise_id).name 
+				#rep.exercise_id
+				rep.exercise_name
+				%>:
+			</span>
+			<span class="span3">
+				<%= rep.weight_additional_lb %> lbs, 
+				(<%= rep.work_joule.round %> joules)
+			</span>
+			<% bars = (rep.weight_additional_lb/25).round %>
+			
+			<% 1.upto(3 < bars ? 3 : bars) do |n| %>
+				<span class="btn btn-mini intensity-bars-mini" ></span>
+			<% end %>
+			<% 4.upto(6 < bars ? 6 : bars) do |n| %>
+				<span class="btn btn-mini btn-info intensity-bars-mini" ></span>
+			<% end %>
+			<% 7.upto(9 < bars ? 9 : bars) do |n| %>
+				<span class="btn btn-mini btn-primary intensity-bars-mini" ></span>
+			<% end %>
+			<% 10.upto(12 < bars ? 12 : bars) do |n| %>
+				<span class="btn btn-mini btn-danger intensity-bars-mini" ></span>
+			<% end %>
+			<% 13.upto(bars) do |n| %>
+				<span class="btn btn-mini btn-inverse intensity-bars-mini" ></span>
+			<% end %>
+		
+		</li>
+	<%end%>
+</ol>

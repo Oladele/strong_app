@@ -18,6 +18,8 @@ StrongApp::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   match '/play',    to: 'static_pages#play'
+  match '/play_tabs',    to: 'static_pages#play_tabs'
+  match '/play_big',    to: 'static_pages#play_big'
 
   #match '/exercises', to: 'exercises#new'
 

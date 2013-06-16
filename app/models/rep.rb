@@ -14,10 +14,12 @@
 #
 
 class Rep < ActiveRecord::Base
-  attr_accessible :exercise_id, :notes, :weight_additional_kg, :workout_id, :work_joule
+  include WorkoutsHelper
+
+  attr_accessible :exercise_id, :notes, :weight_additional_kg, :weight_additional_lb, :workout_id, :work_joule
   
-  belongs_to :workout, :inverse_of => :reps
-  belongs_to :user
+  belongs_to :workout #, :inverse_of => :reps
+  #belongs_to :user
 
   #validates :workout_id, presence: true
   #issue with nested forms failing with validates
@@ -41,10 +43,19 @@ class Rep < ActiveRecord::Base
   end
 
   def weight_additional_lb()
-    w_kg = weight_additional_kg
-    uw_kg = Unit.new("#{w_kg} kg")
-    uw_lb = uw_kg >> "lb"
-    w_lb = uw_lb.scalar.to_f.round
+    #w_kg = weight_additional_kg
+    #uw_kg = Unit.new("#{w_kg} kg")
+    #uw_lb = uw_kg >> "lb"
+    #w_lb = uw_lb.scalar.to_f.round
+    w_lb = kg_to_lb(weight_additional_kg)
+  end
+
+  def weight_additional_lb=(x)
+    #uw_lb = Unit.new("#{x} lb")
+    #uw_kg = uw_lb >> "kg"
+    #self.weight_additional_kg = uw_kg.scalar.to_f
+    self.weight_additional_kg = lb_to_kg(x)
+    #self.weight_additional_kg = x
   end
 
   def update_private

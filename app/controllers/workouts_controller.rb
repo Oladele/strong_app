@@ -1,4 +1,5 @@
 class WorkoutsController < ApplicationController
+
 	before_filter :signed_in_user
 	#before_filter :correct_user,   only: :destroy
 	before_filter :correct_user, only: [:edit, :update, :destroy]
@@ -21,19 +22,28 @@ class WorkoutsController < ApplicationController
 		end
 	end
 
+	def show
+    #@user = User.find(params[:id])
+    @workout = Workout.find(params[:id])
+    #Per 9.2.2 Now that the correct_user before filter defines @user, 
+    #we can omit it from both actions (edit and update).
+  end
+
 	def edit
     #@user = User.find(params[:id])
+    @workout = Workout.find(params[:id])
     #Per 9.2.2 Now that the correct_user before filter defines @user, 
     #we can omit it from both actions (edit and update).
   end
 
   def update
-    #@user = User.find(params[:id])
+    @user = Workout.find(params[:id]).user
     #Per 9.2.2 Now that the correct_user before filter defines @user, 
     #we can omit it from both actions (edit and update).
+    @workout = Workout.find(params[:id])
     if @workout.update_attributes(params[:workout])
       flash[:success] = "Workout updated"
-      redirect_to root_url
+      redirect_to @user
     else
       render 'edit'
     end

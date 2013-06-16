@@ -2,14 +2,14 @@
 #
 # Table name: workouts
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  duration   :integer
-#  weigh_in   :float
-#  notes      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  date       :datetime
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#  duration     :integer
+#  my_weight_kg :float
+#  notes        :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  date         :datetime
 #
 
 require 'spec_helper'

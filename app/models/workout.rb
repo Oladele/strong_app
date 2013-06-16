@@ -2,22 +2,24 @@
 #
 # Table name: workouts
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  duration   :integer
-#  weigh_in   :float
-#  notes      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  date       :datetime
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#  duration     :integer
+#  my_weight_kg :float
+#  notes        :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  date         :datetime
 #
 
 class Workout < ActiveRecord::Base
-  attr_accessible :date, :duration, :notes, :user_id, :weigh_in, :reps_attributes
+  include WorkoutsHelper
+
+  attr_accessible :date, :duration, :notes, :user_id, :my_weight_kg, :my_weight_lb, :reps_attributes
   
   belongs_to :user, :inverse_of => :workouts
-  has_many :reps, inverse_of: :workout, dependent: :destroy
-  accepts_nested_attributes_for :reps, allow_destroy: :true
+  has_many :reps #, dependent: :destroy, inverse_of: :workout
+  accepts_nested_attributes_for :reps, allow_destroy: true
 
   validates :user_id, presence: true
 
@@ -54,5 +56,11 @@ class Workout < ActiveRecord::Base
     w_lb = uw_lb.scalar.to_f.round
   end
 
-	
+  def my_weight_lb()
+    kg_to_lb(my_weight_kg)
+	end
+
+  def my_weight_lb=(w_lb)
+    self.my_weight_kg = lb_to_kg(w_lb)
+  end
 end

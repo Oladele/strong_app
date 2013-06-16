@@ -255,7 +255,7 @@ input {
 }
 
 .exercises {
-  list-style-type: square;
+  list-style-type: none;
   margin: 0;
   li {
     overflow: auto;
@@ -298,4 +298,13 @@ input {
     }
 
   }
+}
+
+.hero-unit {
+  background-image: url('Web_Eagle_v2.png');
+  /*background-size: 336px/2 576px/2*/
+  /*background-size: 252px 432px;*/
+  background-repeat:no-repeat;
+  background-position: 100px -210px;
+  /*display: compact;*/
 }

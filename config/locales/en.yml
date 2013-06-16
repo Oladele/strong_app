@@ -6,3 +6,11 @@ en:
     attributes:
       user:
         password_digest: "Password"
+  weight_additional_18:
+    weight_additional_lb
+  label_my_weight_18:
+    Weight(lb)
+  field_my_weight_18:
+    my_weight_lb
+  label_additional_weight_18:
+    Additional Weight(lb)

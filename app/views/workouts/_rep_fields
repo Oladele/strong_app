@@ -4,7 +4,7 @@
 			<%= f.collection_select :exercise_id, Exercise.all, :id, :name %>
 		</div>
 		<div class="span1">
-			<%= f.text_field :weight_additional_kg %>
+			<%= f.text_field t(:weight_additional_18) %>
 		</div>
 		<p class="span1 pull-right">
 			<%= link_to_remove_fields("remove", f )%>

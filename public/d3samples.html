@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="/assets/d3.v3.js"></script>
+        <style type="text/css">
+        
+            div.bar {
+                display: inline-block;
+                width: 20px;
+                height: 75px;
+                margin-right: 2px;
+                background-color: teal;
+            }
+
+            svg .pumpkin {
+                fill: yellow;
+                stroke: orange;
+                stroke-width: 5;
+            }
+
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <p> HTML: Append new paragraph </p>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go here
+            d3.select("body").append("p").text("JS: First New paragraph!");
+        </script>
+
+        <p> HTML: Append new paragraphs bound to data [ 5, 10, 15, 20, 25 ] </p>
+        <script type="text/javascript">
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            d3.select("body").selectAll("p")
+                .data(dataset)
+                .enter()
+                .append("p")
+                .text(function(d) { 
+                    return "JS: New paragraph " + d; 
+                    }
+                )
+                .style("color", function(d){
+                    if (d>20) {
+                        return "red";
+                    }else {
+                        return "black";
+                    }
+                });
+        </script>
+
+        <p> HTML: Bar Chart [ 5, 10, 15, 20, 25 ] </p>
+        <script type="text/javascript">
+        //var dataset = [ 5, 10, 15, 20, 25 ];
+        d3.select("body").selectAll("div")
+            .data(dataset)
+            .enter()
+            .append("div")
+            .attr("class", "bar")
+            .style("height", function(d) {
+                var barHeight = d*5;
+                return barHeight + "px";
+            })
+            ;
+        </script>
+    
+     <p> HTML: Bar Chart [ Random(25 elements, 0<-> 30) ] </p>
+        <script type="text/javascript">
+        var datasetRand = [];                    //Initialize empty array
+        for (var i = 0; i < 25; i++) {           //Loop 25 times
+            //var newNumber = Math.random() * 30;  //New random number (0-30)
+            var newNumber = Math.round(Math.random() * 30);
+            datasetRand.push(newNumber);        //Add new number to array
+        }
+        d3.select("body").selectAll("div")
+            .data(datasetRand)
+            .enter()
+            .append("div")
+            .attr("class", "bar")
+            .style("height", function(d) {
+                var barHeight = d*5;
+                return barHeight + "px";
+            })
+            ;
+        </script>
+
+        <p> HTML: svg element </p>
+        <svg width="500" height="50">
+            <rect x="0" y="0" width="500" height="50"/>
+            <circle cx="200" cy="25" r="25" fill="gray"/>
+            <text x="250" y="25" font-family="sans-serif" font-size="25" 
+                fill="gray">Easy-peasy</text>
+            <circle cx="40" cy="25" r="22"
+                fill="black" stroke="gray" stroke-width="5"/>
+            <circle cx="80" cy="25" r="22"
+                class ="pumpkin"/>
+        </svg>
+
+         <p> HTML: D3 with SVG </p>
+        <script type="text/javascript">
+        //Width and height
+        var w = 500;
+        var h = 50;
+        //By variabalizing the size values, they can be easily referenced
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)   // <-- Here
+            .attr("height", h); // <-- and here!
+
+        //var dataset3 = [ 5, 10, 15, 20, 25 ];
+        var circles = svg.selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle");
+
+        circles.attr("cx", function(d, i) {
+            return (i * 50) + 25;
+        })
+        .attr("cy", h/2)
+        .attr("r", function(d) {
+            return d;
+        })
+        .attr("class", "pumpkin");
+
+        </script>
+
+         <p> HTML: D3 Bar Chart with SVG </p>
+        <script type="text/javascript">
+        //Width and height
+        var w = 500;
+        var h = 150;
+        var barPadding = 1;  // <-- New!
+        //By variabalizing the size values, they can be easily referenced
+
+        //Create SVG element
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)   // <-- Here
+            .attr("height", h); // <-- and here!
+
+        svg.selectAll("rect")
+            .data(datasetRand)
+            .enter()
+            .append("rect")
+            .attr ("x", function(d, i) {
+                return i * (w/datasetRand.length);  //Bar width of 20 plus 1 for padding
+            })
+            .attr("y", function(d) {
+                return h - d*4;  //Height minus data value
+            })
+            .attr("width", w/datasetRand.length - barPadding)
+            //.attr("height", 100)
+            .attr("height", function(d) {
+                return d*4;  //bar height = dataset element value * 4
+           })
+            .attr("fill", function(d) {
+                return "rgb(0, 0, " + (d * 10) + ")";
+            });
+
+            svg.selectAll("text")
+               .data(datasetRand)
+               .enter()
+               .append("text")
+               .text(function(d) {
+                    return d;
+                })
+               .attr ("x", function(d, i) {
+                    return i * (w / datasetRand.length) + (w / datasetRand.length - barPadding) / 2
+                })
+                .attr("y", function(d) {
+                    return h - (d*4) + 14;  //Height minus data value
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", "white")
+                .attr("text-anchor", "middle")
+                ;
+        </script>
+
+        <p> HTML: D3 Scatter plot </p>
+        <script type="text/javascript">
+            var datasetxy = [
+                [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
+                [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]
+            ];
+
+            //Create SVG element
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+            svg.selectAll("circle")
+                .data(datasetxy)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d) {
+                    return d[0];
+                })
+                .attr("cy", function(d) {
+                    return d[1];
+                })
+                .attr("r", function(d) {
+                    return Math.sqrt(h - d[1]);
+                });
+
+            svg.selectAll("text")
+                .data(datasetxy)
+                .enter()
+                .append("text")
+                .text(function(d) {
+                    return d[0] + "," + d[1];
+                })
+                .attr("x", function(d) {
+                    return d[0];
+                })
+                .attr("y", function(d) {
+                    return d[1];
+                })
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "11px")
+                    .attr("fill", "red")
+                ;
+        </script>
+
+        <p> HTML: D3 Scatter plot using Scale </p>
+        <script type="text/javascript">
+
+            datasetxy.push([600,150]);
+            h = 300;
+
+            var padding = 20;
+
+            var xScale = d3.scale.linear()
+                .domain([0,d3.max(datasetxy,function(d){return d[0];})])
+                .range([padding, w-padding*2]);
+
+            var yScale = d3.scale.linear()
+                .domain([0,d3.max(datasetxy,function(d){return d[1];})])
+                .range([h - padding, padding]);                    
+            var rScale = d3.scale.linear()
+                .domain([0, d3.max(datasetxy, function(d) { return d[1]; })])
+                .range([2, 5]);
+
+            //Create SVG element
+            
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h)
+                //.attr("fill", "gray")
+                ;
+
+            svg.selectAll("circle")
+                .data(datasetxy)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("cy", function(d) {
+                    return yScale(d[1]);
+                })
+                .attr("r", function(d) {
+                    return rScale(d[1]);
+                })
+                ;
+
+            svg.selectAll("text")
+                .data(datasetxy)
+                .enter()
+                .append("text")
+                .text(function(d) {
+                    return d[0] + "," + d[1];
+                })
+                .attr("x", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("y", function(d) {
+                    return yScale(d[1]);
+                })
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "11px")
+                    .attr("fill", "red")
+                ;
+        </script>
+
+        <p> HTML: D3 Scatter plot using Scale AND Axis </p>
+        <script type="text/javascript">
+
+            var padding = 20;
+
+            var xScale = d3.scale.linear()
+                .domain([0,d3.max(datasetxy,function(d){return d[0];})])
+                .range([padding, w-padding*2]);
+
+            var yScale = d3.scale.linear()
+                .domain([0,d3.max(datasetxy,function(d){return d[1];})])
+                .range([h - padding, padding]);                    
+            var rScale = d3.scale.linear()
+                .domain([0, d3.max(datasetxy, function(d) { return d[1]; })])
+                .range([2, 5]);
+
+            var xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient("bottom");
+
+            //Create SVG element
+            
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h)
+                //.attr("fill", "gray")
+                ;
+
+            svg.selectAll("circle")
+                .data(datasetxy)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("cy", function(d) {
+                    return yScale(d[1]);
+                })
+                .attr("r", function(d) {
+                    return rScale(d[1]);
+                })
+                ;
+
+            svg.selectAll("text")
+                .data(datasetxy)
+                .enter()
+                .append("text")
+                .text(function(d) {
+                    return d[0] + "," + d[1];
+                })
+                .attr("x", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("y", function(d) {
+                    return yScale(d[1]);
+                })
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "11px")
+                    .attr("fill", "red")
+                ;
+
+            svg.append("g")
+                .attr("class", "axis")  //Assign "axis" class
+                .attr("transform", "translate(0," + (h - padding) + ")")
+                .call(xAxis);
+
+        </script>
+
+    </body>
+</html>

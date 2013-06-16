@@ -8,8 +8,8 @@
 				<%= f.text_field :date %>
 			</div>
 			<div class="span2 pull-right">
-				<%= f.label :weigh_in %>
-				<%= f.text_field :weigh_in, placeholder: "kg" %>
+				<%= f.label t(:label_my_weight_18) %>
+				<%= f.text_field t(:field_my_weight_18) %>
 			</div>
 		</div>
 
@@ -21,14 +21,14 @@
 				Exercise
 			</div>
 			<div class="span2 pull-right">
-				Weight(kg)
+				<%= t(:label_additional_weight_18) %>
 			</div>
 		</div>
 		<%= f.fields_for :reps do |builder| %>
 			<%= render 'rep_fields', f: builder %>
 		<% end %>
 	</div>
-	
+
 	<p><%= link_to_add_fields "Add Rep", f, :reps %></p>	
 	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>

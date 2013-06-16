@@ -30,7 +30,7 @@ module SessionsHelper
 
     def not_signed_in_user
     	if signed_in?
-	    	redirect_to user_path(current_user)
+	    	#redirect_to user_path(current_user)
   		end
     end
 
