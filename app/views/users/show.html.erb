@@ -1,37 +1,9 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-	<aside class="span4">
-		<section>
-			<div>
-				<h1><%= @user.name %></h1>
-			</div>
-			<h1>
-				<%= gravatar_for @user, size: 150 %>
-			</h1>
-		</section>
-	</aside>
-	<div class= "span4 hero-unit">
-		<h2> Progress Chart </h2>
-	</div>	
-</div>
-<div class="row">
-	<div class="span9">
-		<% if @user.workouts.any? %>
-			<h3>Total Workouts(<%= @user.workouts.count %>)</h3>
-		<%else%>
-			<h3>No workouts recorded.</h3>
-		<% end %>
-	</div>
-</div>
-<div class="row">
-	<div class="span2">
-			<% if current_user?(@user) %>
-				<h3><%= link_to "New workout", new_workout_path, class: "btn btn-large btn-primary" %></h3>
-			<% end %>
-	</div>		
-</div>
+
+<%= render 'user_panel' ,user: @user %>
 
 
+<!-- BEGIN generic horizontal tabs !-->
 <div class="tabbable tabs-left">
 	<ul class = "nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#tab1">first</a></li>
@@ -52,8 +24,56 @@
 	  <div id="tab4" class="tab-pane fade">
 	   	<p> tab4 content here </p>
 	  </div>
-		</div>
+	</div>
 </div>
+
+<!-- END generic horizontal tabs !-->
+
+<!-- BEGIN workouts horizontal tabs !-->
+<div class="tabbable tabs-left">
+	<ul class = "nav nav-tabs">
+		
+
+		<% @workouts.each do |workout| %>
+			<% if workout == @workouts.first %>
+			<li class="active">
+	    	<a data-toggle="tab" href="#<%=workout.id.to_s%>">
+	    		<%= render 'workout_heading' ,workout: workout %>
+	    	</a>
+	    </li>
+	    <% else %>
+		    <li class="">
+		    	<a data-toggle="tab" href="#<%=workout.id.to_s%>">
+		    		<%= render 'workout_heading' ,workout: workout %>
+		    	</a>
+		    </li>
+		  <% end %>
+		<% end %>
+
+	</ul>
+	
+	<div class="tab-content" id="myTabContent">
+
+		<% @workouts.each do |workout| %>
+			<% if workout == @workouts.first %>
+				<div 	id="<%=workout.id.to_s%>" 
+							class="tab-pane fade active in">
+			   	<p>
+			   		<%= render 'workout_content' , workout: workout %> 
+			   	</p>
+			  </div>
+			<%else%>
+			  <div 	id="<%=workout.id.to_s%>" 
+			  			class="tab-pane fade">
+			   	<p>
+			   		<%= render 'workout_content' , workout: workout %> 
+			   	</p>
+			  </div>
+			<% end %>
+	  <%end %>
+	</div>
+</div>
+<!-- END workouts horizontal tabs !-->
 
 <%= will_paginate @workouts %>
 
